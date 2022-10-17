@@ -54,6 +54,8 @@ describe('Vigenere cipher', () => {
 
     it.optional('base encryption', () => {
       assert.equal(directMachine.encrypt('attack at dawn!', 'alphonse'), 'AEIHQX SX DLLU!');
+      //'attack at dawn!'
+      //'alphon se'
       assert.equal(directMachine.encrypt('Example of sequence: 1, 2, 3, 4.', 'lilkey'), 'PFLWTJP WQ CIOFMYMI: 1, 2, 3, 4.');
       assert.equal(directMachine.encrypt('cryptography', 'verylongkeyword'), 'XVPNECTXKTFU');
       assert.equal(directMachine.encrypt('Samelengthkey', 'Samelengthkey'), 'KAYIWIAMMOUIW');
@@ -82,12 +84,14 @@ describe('Vigenere cipher', () => {
 
     it.optional('double-sided reverse cryptography 2', () => {
       for (let i = 2; i < 200; i += 1) {
+        
         const testStr = createTestString(i);
         const reversedTestStr = testStr.split('').reverse().join('');
         const testKey = createTestKey(i - i % 2);
         const encrypted = reverseMachine.encrypt(reversedTestStr, testKey);
         const reversedEncrypted = encrypted.split('').reverse().join('');
         assert.equal(reverseMachine.decrypt(reversedEncrypted, testKey), testStr);
+        
       }
     });
   });
